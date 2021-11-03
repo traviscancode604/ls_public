@@ -1,0 +1,5 @@
+{
+  "testMsg" : "this is a test message put above the edge case tests",
+  "principalPrompt" : "How much is the mortgage principal?",
+  "secondTestMsg" :  "What's the second number?"
+}

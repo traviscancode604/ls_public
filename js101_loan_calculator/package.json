@@ -1,0 +1,15 @@
+{
+  "name": "js101_loan_calculator",
+  "version": "1.0.0",
+  "description": "## Problem Take everything that you've learned so far and build a mortgage calculator (or car payment calculator -- it's the same thing).",
+  "main": "loan_calc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
+}

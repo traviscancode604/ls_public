@@ -1,17 +1,35 @@
+const readline = require('readline-sync');
+const MESSAGES = require('./calculator_messages.json');
+let inputLoanAmount;
+let inputAnnualPercentageRate;
+let inputLoanDurationInYears;
 
-let loanAmount = 100000;
-let annualPercentageRate = 0.05;
-let monthlyInterestRate = annualPercentageRate / 12;
-let loanDurationInMonths = 60;
+function amortLoanPayment(loanAmount, annualPercentageRate, loanDurationInYears) {
+  let monthlyInterestRate = annualPercentageRate / 12;
+  let loanDurationInMonths = loanDurationInYears * 12;
+  let monthlyPayment;
 
-console.log(loanAmount * (monthlyInterestRate / (1 - Math.pow((1 + monthlyInterestRate), (-loanDurationInMonths)))));
+  if (annualPercentageRate) {
+    monthlyPayment = (loanAmount * (monthlyInterestRate / 
+    (1 - Math.pow((1 + monthlyInterestRate), (-loanDurationInMonths))))).toFixed(2);
+  } else {
+    monthlyPayment = (loanAmount / loanDurationInMonths).toFixed(2);
+  }
+return monthlyPayment;
+}
+
+function prompt(message) {
+  console.log(`=> ${message}`);
+}
+
+prompt("Welcome to the Loan Calculator Program!");
+
+prompt(MESSAGES.principalPrompt);
+inputLoanAmount = readline.question();
 
 
-/*
-
-amortLoanPayment(amount in dollars, APR, loan duration in years)
-amortLoanPayment(100000, 5%, 10) // $1060.66
-amortLoanPayment(100000, 5%, 5) // $1887.12
-amortLoanPayment(100000, 0%, 5) // $1666.67 // 0 is an edge case, 1^x = 1, so you end up with a 0 in denominator.
-
-*/
+prompt(MESSAGES.testMsg);
+console.log(inputLoanAmount);
+console.log(amortLoanPayment(100000, 0.05, 10)); // $1060.66
+console.log(amortLoanPayment(100000, 0.05, 5)); // $1887.12
+console.log(amortLoanPayment(100000, 0.0, 5)); // $1666.67. 0 is an edge case (you end up with a 0 in denominator)
