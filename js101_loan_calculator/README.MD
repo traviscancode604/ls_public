@@ -31,9 +31,9 @@ Assumptions for inputs to determine edge case boundaries:
 3. Assuming no lump sum or accelerated payments in the amortization schedule.
 4. Loan ammount is at least $1.00.
 5. Loan duration must be at least 0.5 years. 0.0833333 is needed to properly do months.
-6. Interested is compounded once a month at the end of the month.
+6. Interest is compounded once a month at the end of the month.
 
-Inputs will be 3 numbers.
+Inputs will be 3 seperate numbers.
 Output will be a single number with 2 decimal places.
 
 
@@ -56,3 +56,4 @@ Ask the user if they would like to try a new calculation, or exit the program.
 
 
 ## Code
+See loan_calc.js
