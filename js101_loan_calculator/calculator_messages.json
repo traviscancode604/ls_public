@@ -5,5 +5,6 @@
   "loanDurationPrompt" : "How many years is the mortgage?\n Please enter a number greater than 0.5 (e.g.: 5.0).",
   "inputErrorMsg" : "Please enter a valid number per the instructions in the prompt.",
   "outputMsg" : "Your monthly mortgage payment is: $",
-  "retryMsg" : "Would you like to calculate another mortgage payment? (y/n)"
+  "retryMsg" : "Would you like to calculate another mortgage payment? (y/n)",
+  "exitMsg" : "Thank you for using the mortgage calculator!"
 }
