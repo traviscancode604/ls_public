@@ -1,10 +1,24 @@
 {
-  "testMsg" : "this is a test message put above the edge case tests",
-  "principalPrompt" : "How much is the mortgage principal?\n Please enter a number greater than 1.00 dollar (e.g.: 10000).",
-  "annualInterestPrompt" :  "What is the mortgage interest rate?\n Please enter a value between 0.00 and 1.00 (e.g.: 0.05)",
-  "loanDurationPrompt" : "How many years is the mortgage?\n Please enter a number greater than 0.5 (e.g.: 5.0).",
-  "inputErrorMsg" : "Please enter a valid number per the instructions in the prompt.",
-  "outputMsg" : "Your monthly mortgage payment is: $",
-  "retryMsg" : "Would you like to calculate another mortgage payment? (y/n)",
-  "exitMsg" : "Thank you for using the mortgage calculator!"
+  "car" :{
+    "loanType" : "What type of loan would you like to calculate today?\n c for car, or m for mortgage.",
+    "testMsg" : "this is a test message put above the edge case tests",
+    "principalPrompt" : "How much is the mortgage principal?\n Please enter a number greater than 1.00 dollar (e.g.: 10000).",
+    "annualInterestPrompt" :  "What is the mortgage interest rate?\n Please enter a value between 0.00 and 1.00 (e.g.: 0.05)",
+    "loanDurationPrompt" : "How many years is the mortgage?\n Please enter a number greater than 0.5 (e.g.: 5.0).",
+    "inputErrorMsg" : "Please enter a valid number per the instructions in the prompt.",
+    "outputMsg" : "Your monthly mortgage payment is: $",
+    "retryMsg" : "Would you like to calculate another mortgage payment? (y/n)",
+    "exitMsg" : "Thank you for using the mortgage calculator!"
+  },
+  "mortgage" :{
+    "loanType" : "What type of loan would you like to calculate today?\n c for car, or m for mortgage.",
+    "testMsg" : "this is a test message put above the edge case tests",
+    "principalPrompt" : "How much is the mortgage principal?\n Please enter a number greater than 1.00 dollar (e.g.: 10000).",
+    "annualInterestPrompt" :  "What is the mortgage interest rate?\n Please enter a value between 0.00 and 1.00 (e.g.: 0.05)",
+    "loanDurationPrompt" : "How many years is the mortgage?\n Please enter a number greater than 0.5 (e.g.: 5.0).",
+    "inputErrorMsg" : "Please enter a valid number per the instructions in the prompt.",
+    "outputMsg" : "Your monthly mortgage payment is: $",
+    "retryMsg" : "Would you like to calculate another mortgage payment? (y/n)",
+    "exitMsg" : "Thank you for using the mortgage calculator!"
+  }
 }

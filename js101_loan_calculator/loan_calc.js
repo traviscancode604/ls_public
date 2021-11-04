@@ -3,6 +3,7 @@ const MESSAGES = require('./calculator_messages.json');
 let inputLoanAmount;
 let inputAnnualPercentageRate;
 let inputLoanDurationInYears;
+// got to here, need to add the 'languages' functionality...
 
 function amortLoanPayment(
   loanAmount, annualPercentageRate, loanDurationInYears
@@ -28,32 +29,38 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
+function messages(message, loan = 'mortgage') {
+  return MESSAGES[loan][message];
+}
+
 function invalidNumber(number) {
   return number.trimStart() === '' || Number.isNaN(Number(number));
 }
-
+console.clear();
 console.log("***********************************************");
 console.log("*** Welcome to the Loan Calculator Program! ***");
 console.log("***********************************************\n");
 
 while (true) {
-  prompt(MESSAGES.principalPrompt);
+  prompt(messages('principalPrompt'));
   inputLoanAmount = readline.question();
 
   while (inputLoanAmount === '0' || invalidNumber(inputLoanAmount)) {
-    prompt(MESSAGES.inputErrorMsg);
+    // Need a non-zero loan amount that is also a valid number.
+    prompt(messages('inputErrorMsg'));
     inputLoanAmount = readline.question();
   }
 
-  prompt(MESSAGES.annualInterestPrompt);
+  prompt(messages('annualInterestPrompt'));
+  // Will technically work with more than 100%, but isn't program breaking.
   inputAnnualPercentageRate = readline.question();
 
   while (invalidNumber(inputAnnualPercentageRate)) {
-    prompt(MESSAGES.inputErrorMsg);
+    prompt(messages('inputErrorMsg'));
     inputAnnualPercentageRate = readline.question();
   }
 
-  prompt(MESSAGES.loanDurationPrompt);
+  prompt(messages('loanDurationPrompt'));
   inputLoanDurationInYears = readline.question();
 
   while (
@@ -61,12 +68,12 @@ while (true) {
   ) {
     // Need 7 sig-figs to properly calculate months.
     // So we'll use a reasonable loan periods (ie: half a year or more).
-    prompt(MESSAGES.inputErrorMsg);
+    prompt(messages('inputErrorMsg'));
     inputLoanDurationInYears = readline.question();
   }
 
   prompt(
-    MESSAGES.outputMsg
+    messages('outputMsg')
     + amortLoanPayment(
       inputLoanAmount,
       inputAnnualPercentageRate,
@@ -74,11 +81,16 @@ while (true) {
     )
   );
 
-  prompt(MESSAGES.retryMsg);
+  prompt(messages('retryMsg'));
   let answer = readline.question();
-  if (answer[0].toLowerCase() !== 'y') break;
+  if (answer[0].toLowerCase() !== 'y') {
+    break;
+  } else {
+    console.clear();
+  }
+
 }
-prompt(MESSAGES.exitMsg);
+prompt(messages('exitMsg'));
 /*
 console.log(amortLoanPayment(10000, 0.05, 0.5)); // $1,691.06
 console.log(amortLoanPayment(100000, 0.05, 10)); // $1060.66
