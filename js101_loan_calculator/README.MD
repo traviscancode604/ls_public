@@ -30,7 +30,7 @@ Assumptions for inputs to determine edge case boundaries:
 2. Interest rate is a number between 0-100% (interest free loans are allowed).
 3. Assuming no lump sum or accelerated payments in the amortization schedule.
 4. Loan ammount is at least $1.00.
-5. Loan duration must be at least 1 month (0.083 years) in duration.
+5. Loan duration must be at least 0.5 years. 0.0833333 is needed to properly do months.
 6. Interested is compounded once a month at the end of the month.
 
 Inputs will be 3 numbers.
@@ -48,11 +48,11 @@ Ask the user for the 3 inputs (loan amount, APR interest rate, and duration in y
 
 Convert the inputs to the appropriate units for the monthly payment calculator. 
 - the interest rate `j` in the equation needs to be expressed as a decimal value. 5% = 0.05 
-- The length of the loan `N` needs to be expressed in months. 1 year = 12 moths
+- The length of the loan `N` needs to be expressed in months.
 
 Return the monthly payment amount.
 
-Ask the user if they would like to try a new calculation, switch calculation type, or exit the program.
+Ask the user if they would like to try a new calculation, or exit the program.
 
 
 ## Code
