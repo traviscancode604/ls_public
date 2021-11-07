@@ -1,12 +1,17 @@
 const readline = require('readline-sync');
 const VALID_CHOICES = ['rock', 'paper', 'scissors'];
 const VALID_GAME_SELECTIONS = ['r', 'p', 's'];
+const WINS_NEEDED = 3;
 
 let userInputLetterChoice;
 let userChoice;
 let computerChoice;
 let randomIndexCompChoice;
-let playAgainAnswer;
+let currentRoundWinner;
+let currentRoundNumber = 1;
+let userWinCount = 0;
+let computerWinCount = 0;
+
 
 function prompt(message) {
   console.log(`=> ${message}`);
@@ -47,18 +52,22 @@ function displaySelections(user, computer) {
   prompt(`The computer has selected: ${computer}.\n`);
 }
 
-function displayWinner(gameOutcome) {
-  switch (gameOutcome) {
+function displayRoundWinner(roundOutcome) {
+  switch (roundOutcome) {
     case 'user':
-      prompt('You win! You are better than the machine.\n');
+      prompt('You win this round!\n');
       break;
     case 'computer':
-      prompt('The computer is victorious. You have lost to a machine!\n');
+      prompt('The computer has won this round.\n');
       break;
     case 'tie':
-      prompt('it is a tie. You are greater than or equal to the machine.\n');
+      prompt('it is a tie!\n');
       break;
   }
+}
+
+function noGameWinnerYet(userWins, computerWins) {
+  return Boolean(userWins < WINS_NEEDED && computerWins < WINS_NEEDED);
 }
 
 function invalidAnswer(choice, arrayOfAllowables) {
@@ -70,7 +79,7 @@ console.log("***********************************************");
 console.log("***             Welcome to RPS!             ***");
 console.log("***********************************************\n");
 
-while (true) {
+while (noGameWinnerYet(userWinCount, computerWinCount)) {
   prompt(`You can select one of the following: ${VALID_CHOICES.join(', ')}`);
   prompt(`Please type one of the following to chose your fighter: ${VALID_GAME_SELECTIONS.join(', ')}`);
   userInputLetterChoice = readline.question().toLowerCase();
@@ -86,15 +95,45 @@ while (true) {
   computerChoice = VALID_CHOICES[randomIndexCompChoice];
 
   displaySelections(userChoice, computerChoice);
-  displayWinner(playGameRound(userChoice, computerChoice));
+  currentRoundWinner = playGameRound(userChoice, computerChoice);
+  displayRoundWinner(currentRoundWinner);
 
-  prompt('Do you want to play again (y/n)?');
-  playAgainAnswer = readline.question().toLowerCase();
-
-  while (invalidAnswer(playAgainAnswer,['y', 'n'])) {
-    prompt('Please enter "y" or "n".');
-    playAgainAnswer = readline.question().toLowerCase();
+  switch (currentRoundWinner) {
+    case 'user':
+      userWinCount += 1;
+      break;
+    case 'computer':
+      computerWinCount += 1;
+      break;
+    case 'tie':
+    default:
+      break;
   }
 
-  if (playAgainAnswer[0] !== 'y') break;
+  /*
+  displayGameStatus(
+    currentRoundNumber,
+    userWinCount,
+    computerWinCount,
+    WINS_NEEDED
+  )
+  */
+  prompt(`End of round number ${currentRoundNumber}.\n`);
+  prompt(`Number of USER wins: ${userWinCount}`);
+  prompt(`Number of COMPUTER wins: ${computerWinCount}`);
+  prompt(`Number of wins needed: ${WINS_NEEDED}\n`);
+
+  // displayEndOfRoundPrompts();
+  if (noGameWinnerYet(userWinCount, computerWinCount)) {
+    prompt(`Type anything to proceed to next round.`);
+  } else if (userWinCount === WINS_NEEDED) {
+    prompt(`You have won! You are better than the machine. Type anything to exit.`);
+  } else if (computerWinCount === WINS_NEEDED) {
+    prompt(`The computer has won. The machine has bested you today. Type anything to exit.`);
+  }
+
+  readline.question();
+  console.clear();
+  currentRoundNumber += 1;
+
 }
