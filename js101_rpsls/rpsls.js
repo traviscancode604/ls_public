@@ -1,6 +1,6 @@
 const readline = require('readline-sync');
-const VALID_CHOICES = ['rock', 'paper', 'scissors'];
-const VALID_GAME_SELECTIONS = ['r', 'p', 's'];
+const VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'Spock'];
+const VALID_GAME_SELECTIONS = ['r', 'p', 's', 'l', 'v'];
 const WINS_NEEDED = 3;
 
 let userInputLetterChoice;
@@ -17,14 +17,22 @@ function prompt(message) {
   console.log(`=> ${message}`);
 }
 
+function checkWinCondition(player1, player2) {
+  if (((player1 === 'rock' || player1 === 'Spock') && player2 === 'scissors') ||
+  ((player1 === 'paper' || player1 === 'Spock') && player2 === 'rock') ||
+  ((player1 === 'scissors' || player1 === 'lizard') && player2 === 'paper') ||
+  ((player1 === 'scissors' || player1 === 'rock') && player2 === 'lizard') ||
+  ((player1 === 'paper' || player1 === 'lizard') && player2 === 'Spock')) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 function playGameRound(user, computer) {
-  if ((user === 'rock' && computer === 'scissors') ||
-      (user === 'paper' && computer === 'rock') ||
-      (user === 'scissors' && computer === 'paper')) {
+  if (checkWinCondition(user, computer)) {
     return 'user';
-  } else if ((user === 'rock' && computer === 'paper') ||
-             (user === 'paper' && computer === 'scissors') ||
-             (user === 'scissors' && computer === 'rock')) {
+  } else if (checkWinCondition(computer, user)) {
     return 'computer';
   } else {
     return 'tie';
@@ -34,14 +42,15 @@ function playGameRound(user, computer) {
 function userChoiceForGame(input) {
   let output;
   switch (input) {
-    case 'r':
-      output = 'rock';
+    case 'r': output = 'rock';
       break;
-    case 'p':
-      output = 'paper';
+    case 'p': output = 'paper';
       break;
-    case 's':
-      output = 'scissors';
+    case 's': output = 'scissors';
+      break;
+    case 'l': output = 'lizard';
+      break;
+    case 'v':  output = 'Spock';
       break;
   }
   return output;

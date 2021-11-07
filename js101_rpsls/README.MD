@@ -9,11 +9,11 @@ Add bonus features to the existing rock paper scissors program.
 3. Best of 5. Keep track of the score. First to 3 wins.
 
 ## Examples
-Rock beats lizard and scissors
-Paper beats rock and Spock
-Scissors beats paper and lizard
-Spock beats rock and scissors
-Lizard beats Spock and paper 
+Rock beats lizard and scissors.
+Paper beats rock and Spock.
+Scissors beats paper and lizard.
+Spock beats rock and scissors.
+Lizard beats Spock and paper.
 
 ## Data
 Input: String inputs from the user in the console for 1 of 5 options.
@@ -29,6 +29,7 @@ SET NUMBER_OF_WINS_REQUIRED = 3; // best of 5
 
 playGameRound(playerChoice, CompChoice):
 Pass the two choices, evaluate. Return the player who won this round.
+Modify existing displayWinner to account for this.
 
 If player wins, increment userNumberOfWins.
 If comp wins, increment compNumberOfWins.
