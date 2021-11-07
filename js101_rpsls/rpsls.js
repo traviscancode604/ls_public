@@ -66,6 +66,25 @@ function displayRoundWinner(roundOutcome) {
   }
 }
 
+function displayRoundEndStatus(roundNum, userWins, compWins) {
+  prompt(`End of round number ${roundNum}.\n`);
+  prompt(`Number of USER wins: ${userWins}`);
+  prompt(`Number of COMPUTER wins: ${compWins}`);
+  prompt(`Number of wins needed to win the game: ${WINS_NEEDED}\n`);
+}
+
+function displayEndOfRoundPrompts(userWins, compWins) {
+  if (userWins === WINS_NEEDED) {
+    prompt(`You have won! You are better than the machine!`);
+    prompt(`Type anything to exit.`);
+  } else if (compWins === WINS_NEEDED) {
+    prompt(`The computer has won. Don't worry, it's just luck!`);
+    prompt(`Type anything to exit.`);
+  } else {
+    prompt(`Type anything to proceed to next round.`);
+  }
+}
+
 function noGameWinnerYet(userWins, computerWins) {
   return Boolean(userWins < WINS_NEEDED && computerWins < WINS_NEEDED);
 }
@@ -75,9 +94,9 @@ function invalidAnswer(choice, arrayOfAllowables) {
 }
 
 console.clear();
-console.log("***********************************************");
-console.log("***             Welcome to RPS!             ***");
-console.log("***********************************************\n");
+console.log("**********************************************************");
+console.log("***  Welcome to Rock, Paper, Scissors, Lizard, Spock!  ***");
+console.log("**********************************************************\n");
 
 while (noGameWinnerYet(userWinCount, computerWinCount)) {
   prompt(`You can select one of the following: ${VALID_CHOICES.join(', ')}`);
@@ -110,30 +129,11 @@ while (noGameWinnerYet(userWinCount, computerWinCount)) {
       break;
   }
 
-  /*
-  displayGameStatus(
-    currentRoundNumber,
-    userWinCount,
-    computerWinCount,
-    WINS_NEEDED
-  )
-  */
-  prompt(`End of round number ${currentRoundNumber}.\n`);
-  prompt(`Number of USER wins: ${userWinCount}`);
-  prompt(`Number of COMPUTER wins: ${computerWinCount}`);
-  prompt(`Number of wins needed: ${WINS_NEEDED}\n`);
-
-  // displayEndOfRoundPrompts();
-  if (noGameWinnerYet(userWinCount, computerWinCount)) {
-    prompt(`Type anything to proceed to next round.`);
-  } else if (userWinCount === WINS_NEEDED) {
-    prompt(`You have won! You are better than the machine. Type anything to exit.`);
-  } else if (computerWinCount === WINS_NEEDED) {
-    prompt(`The computer has won. The machine has bested you today. Type anything to exit.`);
-  }
-
-  readline.question();
+  displayRoundEndStatus(currentRoundNumber, userWinCount, computerWinCount);
+  displayEndOfRoundPrompts(userWinCount, computerWinCount);
+  readline.question(); // No validation, want to give user a chance to read prompts.
   console.clear();
+
   currentRoundNumber += 1;
 
 }
